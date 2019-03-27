@@ -1,0 +1,38 @@
+;loader.txt
+		@ /000
+		
+INIT:	IO /1 			; Get data 
+		MM INITADD1 	; Salva primeiro byte do endereco inicial
+		IO /1 			; Get data 
+		MM INITADD2 	; Salva segundo byte do endereco inicial
+		IO /1 			; Get data 
+		MM TAMANHO	 	; Salva byte do tamanho
+		
+LOOP:	IO /1
+		CN /2
+		MM INITADD1
+		
+		LD INITADD2
+		+ ONE
+		MM INITADD2
+		
+		LD TAMANHO
+		- ONE
+		MM TAMANHO
+		
+		JZ FIM
+		JP LOOP
+		
+FIM: 	IO /1 			; Get data 
+		MM INITADD1 	; Salva primeiro byte do endereco inicial
+		IO /1 			; Get data 
+		MM INITADD2 	; Salva segundo byte do endereco inicial
+		CN /2			
+		JP INITADD1 	; Passa execução para o programa carregado
+           
+INITADD1 K 0
+INITADD2 K 0
+TAMANHO  K 0
+ONE		 K 1
+	
+		# INIT

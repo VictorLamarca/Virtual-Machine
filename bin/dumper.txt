@@ -1,0 +1,47 @@
+;dumper.txt
+		@ 50
+		
+INIT:	LD INITADD1
+		IO /5
+		LD INITADD2
+		IO /5
+		LD TAMANHO
+		MM TAMORIG
+		IO /5
+		
+LOOP:	CN /2
+		LD INITADD1
+		IO /5			;Put data - device = 1
+		
+		;+ CHECKSUM
+		;MM CHECKSUM
+		
+		LD INITADD2
+		+ ONE
+		MM INITADD2
+		
+		LD TAMANHO
+		- ONE
+		MM TAMANHO
+		
+		JZ FIM
+		JP LOOP
+		
+FIM: 	LD INITADD1
+		IO /5
+		LD INITADD2
+		- TAMORIG
+		IO /5
+		LD CHECKSUM
+		IO /5
+		CN HM
+           
+INITADD1 K 1		;Endereço inicial a dumpar
+INITADD2 K /10
+TAMANHO  K /28		;Numero de bytes a dumpar
+TAMORIG  K 0
+OVERFLOW K 0
+CHECKSUM K 0
+ONE		 K 1
+	
+		# INIT

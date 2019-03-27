@@ -1,0 +1,16 @@
+;teste.txt
+
+		@ /100
+
+X       K 5
+Y		K 6
+ANS		K 0
+INIC 	LD ANS
+LOOP	LD X
+		* Y
+		MM ANS
+		JN LOOP ;comentario
+		CN HM
+ 		# INIC
+
+		
